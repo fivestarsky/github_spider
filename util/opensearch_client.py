@@ -13,8 +13,9 @@ client = OpenSearch(
     ssl_show_warn=False
 )
 
+
 def bulk_add_fields():
-    all_github_commits = github_commits.get_all_github_commits("apache", "spark")
+    all_github_commits = github_commits.get_all_github_commits("apache", "spark", since=None, until=None)
     if (all_github_commits is not None) and (len(all_github_commits > 0)):
         bulk_all_github_commits = []
         templet = {"_index": "github_commits",

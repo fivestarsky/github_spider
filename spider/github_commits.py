@@ -15,11 +15,12 @@ def get_github_commits(owner, repo, per_page=100, page=None, since=None, until=N
         print(r.status_code, r.text)
         return None
 
+
 def get_all_github_commits(owner, repo, since=None, until=None):
     all_commits = []
     for page in range(9999):
-        commits = get_github_commits(owner, repo, page)
-        print('commitslen',len(commits))
+        commits = get_github_commits(owner, repo, page=page, since=since, until=until)
+        print('commitslen', len(commits))
         if (commits is not None) and len(commits) > 0:
             all_commits = all_commits + commits
         elif (commits is not None) and len(commits) == 0:
@@ -27,5 +28,3 @@ def get_all_github_commits(owner, repo, since=None, until=None):
         else:
             raise Exception("get_all_github_commits")
     return all_commits
-
-
