@@ -14,14 +14,37 @@ client = OpenSearch(
 )
 
 
-def bulk_add_fields():
-    all_github_commits = github_commits.get_all_github_commits("apache", "spark", since=None, until=None)
+def sync_github_commits(owner, repo, since=None, until=None):
+    success, failed = 0, 0
+    all_github_commits = github_commits.get_all_github_commits(owner, repo, since, until)
     if (all_github_commits is not None) and (len(all_github_commits > 0)):
         bulk_all_github_commits = []
-        templet = {"_index": "github_commits",
+        template = {"_index": "github_commits",
                    "_source": None}
         for now_commit in all_github_commits:
-            commit_item = templet.copy()
+            commit_item = template.copy()
             commit_item["_source"] = now_commit
             bulk_all_github_commits.append(commit_item)
-        OpenSearchHelpers.bulk(client=client, actions=bulk_all_github_commits)
+        success, failed = OpenSearchHelpers.bulk(client=client, actions=bulk_all_github_commits)
+
+    return success, failed
+
+def get_all_github_issues(owner, repo, since=None, until=None):
+    client.search()
+    temp='''GET github_issue_raw/_search
+{
+  "query": {
+    "bool": {"must": [
+    {"term": {
+      "search_fields.owner": {
+        "value": "apache"
+      }
+    }},
+    {"term": {
+      "search_fields.repo": {
+        "value": "spark"
+      }
+    }}  
+    ]}
+  }
+}'''
