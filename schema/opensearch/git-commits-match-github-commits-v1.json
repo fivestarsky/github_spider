@@ -1,0 +1,309 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 2,
+      "number_of_replicas": 1
+    }
+  },
+  "mappings": {
+    "dynamic": "true",
+    "dynamic_templates": [
+      {
+        "notanalyzed": {
+          "match": "*",
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "keyword"
+          }
+        }
+      },
+      {
+        "formatdate": {
+          "match": "*",
+          "match_mapping_type": "date",
+          "mapping": {
+            "format": "strict_date_optional_time||epoch_millis",
+            "type": "date"
+          }
+        }
+      }
+    ],
+    "properties": {
+      "commit_hash": {
+        "type": "keyword"
+      },
+      "commit_date": {
+        "type": "keyword"
+      },
+      "commit_user": {
+        "type": "keyword"
+      },
+      "repo": {
+        "type": "keyword"
+      },
+      "data": {
+        "properties": {
+          "sha": {
+            "type": "keyword"
+          },
+          "node_id": {
+            "type": "keyword"
+          },
+          "commit": {
+            "properties": {
+              "author": {
+                "properties": {
+                  "name": {
+                    "type": "keyword"
+                  },
+                  "email": {
+                    "type": "keyword"
+                  },
+                  "date": {
+                    "type": "date"
+                  }
+                }
+              },
+              "committer": {
+                "properties": {
+                  "name": {
+                    "type": "keyword"
+                  },
+                  "email": {
+                    "type": "keyword"
+                  },
+                  "date": {
+                    "type": "date"
+                  }
+                }
+              },
+              "message": {
+                "type": "keyword"
+              },
+              "tree": {
+                "properties": {
+                  "sha": {
+                    "type": "keyword"
+                  },
+                  "url": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "url": {
+                "type": "keyword"
+              },
+              "comment_count": {
+                "type": "long"
+              },
+              "verification": {
+                "properties": {
+                  "verified": {
+                    "type": "boolean"
+                  },
+                  "reason": {
+                    "type": "keyword"
+                  },
+                  "signature": {
+                    "type": "keyword"
+                  },
+                  "payload": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          "url": {
+            "type": "keyword"
+          },
+          "html_url": {
+            "type": "keyword"
+          },
+          "comments_url": {
+            "type": "keyword"
+          },
+          "author": {
+            "properties": {
+              "login": {
+                "type": "keyword"
+              },
+              "id": {
+                "type": "long"
+              },
+              "node_id": {
+                "type": "keyword"
+              },
+              "avatar_url": {
+                "type": "keyword"
+              },
+              "gravatar_id": {
+                "type": "keyword"
+              },
+              "url": {
+                "type": "keyword"
+              },
+              "html_url": {
+                "type": "keyword"
+              },
+              "followers_url": {
+                "type": "keyword"
+              },
+              "following_url": {
+                "type": "keyword"
+              },
+              "gists_url": {
+                "type": "keyword"
+              },
+              "starred_url": {
+                "type": "keyword"
+              },
+              "subscriptions_url": {
+                "type": "keyword"
+              },
+              "organizations_url": {
+                "type": "keyword"
+              },
+              "repos_url": {
+                "type": "keyword"
+              },
+              "events_url": {
+                "type": "keyword"
+              },
+              "received_events_url": {
+                "type": "keyword"
+              },
+              "type": {
+                "type": "keyword"
+              },
+              "site_admin": {
+                "type": "boolean"
+              }
+            }
+          },
+          "committer": {
+            "properties": {
+              "login": {
+                "type": "keyword"
+              },
+              "id": {
+                "type": "long"
+              },
+              "node_id": {
+                "type": "keyword"
+              },
+              "avatar_url": {
+                "type": "keyword"
+              },
+              "gravatar_id": {
+                "type": "keyword"
+              },
+              "url": {
+                "type": "keyword"
+              },
+              "html_url": {
+                "type": "keyword"
+              },
+              "followers_url": {
+                "type": "keyword"
+              },
+              "following_url": {
+                "type": "keyword"
+              },
+              "gists_url": {
+                "type": "keyword"
+              },
+              "starred_url": {
+                "type": "keyword"
+              },
+              "subscriptions_url": {
+                "type": "keyword"
+              },
+              "organizations_url": {
+                "type": "keyword"
+              },
+              "repos_url": {
+                "type": "keyword"
+              },
+              "events_url": {
+                "type": "keyword"
+              },
+              "received_events_url": {
+                "type": "keyword"
+              },
+              "type": {
+                "type": "keyword"
+              },
+              "site_admin": {
+                "type": "boolean"
+              }
+            }
+          },
+          "parents": {
+            "properties": {
+              "sha": {
+                "type": "keyword"
+              },
+              "url": {
+                "type": "keyword"
+              },
+              "html_url": {
+                "type": "keyword"
+              }
+            }
+          },
+          "stats": {
+            "properties": {
+              "total": {
+                "type": "long"
+              },
+              "additions": {
+                "type": "long"
+              },
+              "deletions": {
+                "type": "long"
+              }
+            }
+          },
+          "files": {
+            "properties": {
+              "sha": {
+                "type": "keyword"
+              },
+              "filename": {
+                "type": "keyword"
+              },
+              "status": {
+                "type": "keyword"
+              },
+              "additions": {
+                "type": "long"
+              },
+              "deletions": {
+                "type": "long"
+              },
+              "changes": {
+                "type": "long"
+              },
+              "blob_url": {
+                "type": "keyword"
+              },
+              "raw_url": {
+                "type": "keyword"
+              },
+              "contents_url": {
+                "type": "keyword"
+              },
+              "patch": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "aliases": {
+    "git-commits-match-github-commits": {}
+  }
+}
