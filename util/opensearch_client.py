@@ -31,20 +31,3 @@ def sync_github_commits(owner, repo, since=None, until=None):
 
 def get_all_github_issues(owner, repo, since=None, until=None):
     client.search()
-    temp='''GET github_issue_raw/_search
-{
-  "query": {
-    "bool": {"must": [
-    {"term": {
-      "search_fields.owner": {
-        "value": "apache"
-      }
-    }},
-    {"term": {
-      "search_fields.repo": {
-        "value": "spark"
-      }
-    }}  
-    ]}
-  }
-}'''
