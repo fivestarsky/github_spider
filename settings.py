@@ -1,10 +1,13 @@
-import itertools
-
-GITHUB_TOKENS_ITER = itertools.cycle(["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"])
-
-OPENSEARCH_CONFIG = {
-    "HOST": '192.168.8.10',
-    "PORT": 9200,
-    "HTTP_BASIC_AUTH_USER": "admin",
-    "HTTP_BASIC_AUTH_PASS": "admin"
+REDIS_ENABLED_FOR_DYNACONF=True
+REDIS_FOR_DYNACONF = {
+    "host": "192.168.8.10",
+    "port": 6379,
+    "db": 0,
+    "decode_responses": True,
+    "password": "l4MdxZvlj7",
 }
+
+
+
+
+
